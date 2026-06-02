@@ -1,41 +1,35 @@
-# 🌡️Smart Thermostat (SysTec Prototype)
-# CS350
+# 🌡️ Smart Thermostat — Raspberry Pi IoT Prototype
 
-This project demonstrates a working smart thermostat prototype built with a Raspberry Pi 4B, AHT20 temperature/humidity sensor, 16x2 LCD, and two LEDs to simulate heating and cooling states.
+A hardware-software integrated thermostat built on 
+Raspberry Pi 4B with real-time sensor data, 
+state-driven control logic, and simulated cloud telemetry.
 
-## Features
-- Temperature and humidity sensing (AHT20 via I2C)
-- LCD display with live data
-- Button-controlled state machine (Off → Heat → Cool)
-- LED fading indicators
-- UART simulation for cloud data transfer
+## Hardware
+- Raspberry Pi 4B
+- AHT20 temperature/humidity sensor (I2C)
+- 16x2 LCD display
+- LED indicators (heating/cooling states)
 
-## Files
-- `Thermostat.py` – Main program code
-- `StateMachine.pdf` – System state diagram
-- `CS350 Final Project.docx` – Project report
+## How It Works
+The system runs a state machine with three modes:
+Off → Heat → Cool
 
+Button input drives state transitions. 
+The AHT20 sensor reads temperature and humidity via I2C, 
+displays live data on the LCD, and fades LEDs to indicate 
+active heating or cooling. UART output simulates 
+cloud telemetry for remote monitoring.
 
-## Author
-Naim Lindsay  
-Southern New Hampshire University - CS350 Emerging Systems Architectures & Technologies
+## Stack
+- Python
+- GPIO / I2C protocols
+- UART serial communication
+- State machine architecture
 
-
-This project demonstrates a working smart thermostat prototype built with a Raspberry Pi 4B, AHT20 temperature/humidity sensor, 16x2 LCD, and two LEDs to simulate heating and cooling states.
-
-## Features
-- Temperature and humidity sensing (AHT20 via I2C)
-- LCD display with live data
-- Button-controlled state machine (Off → Heat → Cool)
-- LED fading indicators
-- UART simulation for cloud data transfer
-
-## Files
-- `Thermostat.py` – Main program code
-- `StateMachine.png` – System state diagram
-- `CS350 Final Project.docx` – Project report
-- `IMG_4912.MOV` – Demo video (if attached)
-
-## Author
-Naim Lindsay  
-Southern New Hampshire University – CS350 Emerging Systems Architectures & Technologies
+## Key Engineering Decisions
+- Chose I2C over SPI for sensor communication — 
+  simpler wiring, sufficient speed for polling interval
+- State machine pattern keeps control logic 
+  predictable and testable
+- UART output designed to be drop-in replaceable 
+  with real cloud pipeline (MQTT/HTTP)
